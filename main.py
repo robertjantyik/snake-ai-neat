@@ -5,8 +5,8 @@ parser = argparse.ArgumentParser(
     description='Snake AI with NEAT')
 parser.add_argument('-m', '--mode', type=str, default='train', help='Run mode. Possible values: train, best')
 parser.add_argument('-v', '--video', type=bool, default=False, help='Switch rendering the game.')
-parser.add_argument('-c', '--checkpoint', type=str, default='checkpoint1288', help='Name of the checkpoint file to start from.')
-parser.add_argument('-g', '--generations', type=int, default=100, help='Number of generations to run.')
+parser.add_argument('-c', '--checkpoint', type=str, default='checkpoint1359', help='Name of the checkpoint file to start from.')
+parser.add_argument('-g', '--generations', type=int, default=41, help='Number of generations to run.')
 args = parser.parse_args()
 
 WIDTH = 600
@@ -83,10 +83,10 @@ class Snake:
                 #print(f"tail hit at: {pos.x}, {pos.y}")
                 fitness -= 1
                 return True
-        if self.x > WIDTH or self.x < 0:
+        if self.x >= WIDTH or self.x < 0:
             fitness -= 0.1
             return True
-        if self.y > HEIGHT or self.y < 0:
+        if self.y >= HEIGHT or self.y < 0:
             fitness -= 0.1
             return True
         return False
@@ -282,8 +282,9 @@ class Game:
                     food.pick_food_location(player, rnd)
                     inputs_made = 0
                     fitness += 1
-                    font = pygame.font.SysFont('Aria', 50)
-                    text = font.render(f"Score: {player.total}", True, (255, 255, 255))
+                    if args.video:
+                        font = pygame.font.SysFont('Aria', 50)
+                        text = font.render(f"Score: {player.total}", True, (255, 255, 255))
                 if player.death(fitness):
                     genome.fitness = fitness
                     run = False
@@ -309,7 +310,6 @@ class Game:
 
 def run_neat(config):
     checkpoint_prefix = 'checkpoint'
-    checkpoint_interval = 100
 
     if os.path.exists(f'{args.checkpoint}'):
         population = neat.Checkpointer.restore_checkpoint(f'{args.checkpoint}')
@@ -318,7 +318,7 @@ def run_neat(config):
 
     population.add_reporter(neat.StdOutReporter(True))
     population.add_reporter(neat.StatisticsReporter())
-    population.add_reporter(neat.Checkpointer(checkpoint_interval, filename_prefix=checkpoint_prefix))
+    population.add_reporter(neat.Checkpointer(filename_prefix=checkpoint_prefix))
 
     game = Game()
     winner = population.run(game.eval_genomes, args.generations)

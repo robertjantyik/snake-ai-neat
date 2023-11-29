@@ -1,5 +1,7 @@
 # About
 Just a basic Snake game and using the neat-python package to make an AI that learns to play.
+Training is still in progress, checkpoints will be uploaded occasionally.
+
 
 # Dependencies
 * **[Pygame](https://github.com/pygame/)**: Used in game development and user interaction
