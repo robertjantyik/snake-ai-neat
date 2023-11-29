@@ -6,7 +6,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument('-m', '--mode', type=str, default='train', help='Run mode. Possible values: train, best')
 parser.add_argument('-v', '--video', type=bool, default=False, help='Switch rendering the game.')
 parser.add_argument('-c', '--checkpoint', type=str, default='checkpoint1359', help='Name of the checkpoint file to start from.')
-parser.add_argument('-g', '--generations', type=int, default=41, help='Number of generations to run.')
+parser.add_argument('-g', '--generations', type=int, default=1000, help='Number of generations to run.')
 args = parser.parse_args()
 
 WIDTH = 600
