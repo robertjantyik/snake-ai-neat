@@ -1,7 +1,22 @@
-# snake-ai-neat
+# About
 Just a basic Snake game and using the neat-python package to make an AI that learns to play.
 
-# usage
-<code>python main.py</code>
+# Dependencies
+* **[Pygame](https://github.com/pygame/)**: Used in game development and user interaction
+* **[neat-python](https://github.com/CodeReclaimers/neat-python)**: Python implementation of the NEAT neuroevolution algorithm
 
-Use <code>python main.py -h</code> for launch parameters.
+# Usage
+Dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run:
+
+```bash
+python main.py
+```
+
+# Help
+Use -h to see the optional launch parameters.
