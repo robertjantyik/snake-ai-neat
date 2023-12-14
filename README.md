@@ -33,6 +33,7 @@ python main.py
 - F1: Switch between 1 and 60 fps
 - F2: Pause the game for 10 seconds
 - F3: Switch debug mode
+- F4: Disable fps lock
 
 ## Launch options
 
